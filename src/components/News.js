@@ -16,8 +16,12 @@ export class New extends Component {
     category: PropTypes.string
   }
 
-  constructor() {
-    super();
+  capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  constructor(props) {
+    super(props);
     this.state = {
       // Use this when add articles in array
       // articles: this.articles,
@@ -25,6 +29,7 @@ export class New extends Component {
       loading: false,
       page: 1
     }
+    document.title = `${this.capitalizeFirstLetter(this.props.category)} - FastNews`;
   }
 
   async updateNews(){
@@ -56,7 +61,7 @@ export class New extends Component {
   render() {
     return (
       <div className="container">
-        <h1 className="text-center" style={{margin: '35px 0px'}}>Daily News - Top Headlines</h1>
+        <h1 className="text-center" style={{margin: '35px 0px'}}>Daily News - Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
         {/* <Spinner/> */}
         {this.state.loading && <Spinner />}
         <div className="row my-3">
